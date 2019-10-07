@@ -149,6 +149,25 @@ void verify(int arr[], int size){
 
 using namespace std::chrono;
 
+void testOfTwoPara(int arr[], int size, void (*sortAlgo)(int[], int), string name){
+    int* arrToBeSorted = copyArray(arr, size);
+    auto start = high_resolution_clock::now();
+    (*sortAlgo)(arrToBeSorted, size);
+    auto stop = high_resolution_clock::now();
+    duration<double> time_span = duration_cast<duration<double> >(stop - start);
+    cout << name << "  : " << time_span.count() << " seconds  " << endl;
+}
+
+void testOfThreePara(int arr[], int size, void (*sortAlgo)(int[], int, int), string name){
+    int* arrToBeSorted = copyArray(arr, size);
+    auto start = high_resolution_clock::now();
+    (*sortAlgo)(arrToBeSorted, 0, size - 1);
+    auto stop = high_resolution_clock::now();
+    duration<double> time_span = duration_cast<duration<double> >(stop - start);
+    cout << name << "  : " << time_span.count() << " seconds  " << endl;
+}
+
+
 int main()
 {
     
@@ -157,87 +176,21 @@ int main()
     cout << "Large number of data: " << size << endl;
     int* arr1 = getRandom(size);
     
-    //Bubblesort test starts here
-    int* arrBubbleSort = copyArray(arr1, size);
-    auto start = high_resolution_clock::now();
-    bubbleSort(arrBubbleSort, size);
-    auto stop = high_resolution_clock::now();
-    duration<double> time_span = duration_cast<duration<double> >(stop - start);
-    cout << "Bubble Sort   : " << time_span.count() << " seconds  " << endl;
-    verify(arrBubbleSort, size);
+    testOfTwoPara(arr1, size, bubbleSort, "BubbleSort");
+    testOfTwoPara(arr1, size, selectionSort, "SelectionSort");
+    testOfTwoPara(arr1, size, insertionSort, "InsertionSort");
+    testOfThreePara(arr1, size, quickSort, "QuickSort");
     
-    //Selection sort test
-    int* arrSelectionSort = copyArray(arr1, size);
-    start = high_resolution_clock::now();
-    selectionSort(arrSelectionSort, size);
-    stop = high_resolution_clock::now();
-    time_span = duration_cast<duration<double> >(stop - start);
-    cout << "Selection Sort: " << time_span.count() << " seconds  " << endl;
-    verify(arrSelectionSort, size);
-
-    //Insertion Sort test
-    int* arrInsertionSort = copyArray(arr1, size);
-    start = high_resolution_clock::now();
-    insertionSort(arrInsertionSort, size);
-    stop = high_resolution_clock::now();
-    time_span = duration_cast<duration<double> >(stop - start);
-    cout << "Insertion Sort: " << time_span.count() << " seconds; " << endl;
-    verify(arrInsertionSort, size);
-    
-    //Quick sort test
-    int* arrQuickSort = copyArray(arr1, size);
-    start = high_resolution_clock::now();
-    quickSort(arrQuickSort, 0, size - 1);
-    stop = high_resolution_clock::now();
-    time_span = duration_cast<duration<double> >(stop - start);
-    cout << "Quick Sort    : " << time_span.count() << " seconds " << endl;
-    verify(arrQuickSort, size);
-
-    
-
     size = 10000;
-    cout << "Small number of data: " << size << endl;
+    cout << "\nSmall number of data: " << size << endl;
     arr1 = getRandom(size);
     
-    //Bubblesort test starts here
-    arrBubbleSort = copyArray(arr1, size);
-    start = high_resolution_clock::now();
-    bubbleSort(arrBubbleSort, size);
-    stop = high_resolution_clock::now();
-    time_span = duration_cast<duration<double> >(stop - start);
-    cout << "Bubble Sort   : " << time_span.count() << " seconds  " << endl;
-    verify(arrBubbleSort, size);
-
+    testOfTwoPara(arr1, size, bubbleSort, "BubbleSort");
+    testOfTwoPara(arr1, size, selectionSort, "SelectionSort");
+    testOfTwoPara(arr1, size, insertionSort, "InsertionSort");
     
-    //Selection sort test
-    arrSelectionSort = copyArray(arr1, size);
-    start = high_resolution_clock::now();
-    selectionSort(arrSelectionSort, size);
-    stop = high_resolution_clock::now();
-    time_span = duration_cast<duration<double> >(stop - start);
-    cout << "Selection Sort: " << time_span.count() << " seconds  " << endl;
-    verify(arrSelectionSort, size);
-
-    //Insertion Sort test
-    arrInsertionSort = copyArray(arr1, size);
-    start = high_resolution_clock::now();
-    insertionSort(arrInsertionSort, size);
-    stop = high_resolution_clock::now();
-    time_span = duration_cast<duration<double> >(stop - start);
-    cout << "Insertion Sort: " << time_span.count() << " seconds; " << endl;
-    verify(arrInsertionSort, size);
+    testOfThreePara(arr1, size, quickSort, "QuickSort");
     
-    //Quick sort test
-    arrQuickSort = copyArray(arr1, size);
-    start = high_resolution_clock::now();
-    quickSort(arrQuickSort, 0, size - 1);
-    stop = high_resolution_clock::now();
-    time_span = duration_cast<duration<double> >(stop - start);
-    cout << "Quick Sort    : " << time_span.count() << " seconds " << endl;
-    verify(arrInsertionSort, size);
-    
-
-
     
     cout << "***** Test of Narrow Range Uniform Distribution Dataset *****" << endl;
     
