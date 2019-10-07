@@ -140,11 +140,11 @@ void bucketSort(){
     
 }
 
-bool verify(int arr[], int size){
+void verify(int arr[], int size){
     for(int i = 0; i < size - 1; i++)
         if (arr[i] > arr[i + 1])
-            return false;
-    return true;
+            cout << "***VERIGIED***" << endl;
+    cout << "***SORTING IS NOT CORRECT***" << endl;
 }
 
 using namespace std::chrono;
@@ -164,6 +164,7 @@ int main()
     auto stop = high_resolution_clock::now();
     duration<double> time_span = duration_cast<duration<double> >(stop - start);
     cout << "Bubble Sort   : " << time_span.count() << " seconds  " << endl;
+    verify(arrBubbleSort, size);
     
     //Selection sort test
     int* arrSelectionSort = copyArray(arr1, size);
@@ -172,6 +173,7 @@ int main()
     stop = high_resolution_clock::now();
     time_span = duration_cast<duration<double> >(stop - start);
     cout << "Selection Sort: " << time_span.count() << " seconds  " << endl;
+    verify(arrSelectionSort, size);
 
     //Insertion Sort test
     int* arrInsertionSort = copyArray(arr1, size);
@@ -180,7 +182,7 @@ int main()
     stop = high_resolution_clock::now();
     time_span = duration_cast<duration<double> >(stop - start);
     cout << "Insertion Sort: " << time_span.count() << " seconds; " << endl;
-    cout << "Verified: " << verify(arrInsertionSort, size) << endl;
+    verify(arrInsertionSort, size);
     
     //Quick sort test
     int* arrQuickSort = copyArray(arr1, size);
@@ -189,6 +191,8 @@ int main()
     stop = high_resolution_clock::now();
     time_span = duration_cast<duration<double> >(stop - start);
     cout << "Quick Sort    : " << time_span.count() << " seconds " << endl;
+    verify(arrQuickSort, size);
+
     
 
     size = 10000;
@@ -202,6 +206,8 @@ int main()
     stop = high_resolution_clock::now();
     time_span = duration_cast<duration<double> >(stop - start);
     cout << "Bubble Sort   : " << time_span.count() << " seconds  " << endl;
+    verify(arrBubbleSort, size);
+
     
     //Selection sort test
     arrSelectionSort = copyArray(arr1, size);
@@ -210,16 +216,16 @@ int main()
     stop = high_resolution_clock::now();
     time_span = duration_cast<duration<double> >(stop - start);
     cout << "Selection Sort: " << time_span.count() << " seconds  " << endl;
-    cout << "Verified: " << verify(arrSelectionSort, size) << endl;
+    verify(arrSelectionSort, size);
 
     //Insertion Sort test
-    int* arrInsertionSort = copyArray(arr1, size);
+    arrInsertionSort = copyArray(arr1, size);
     start = high_resolution_clock::now();
     insertionSort(arrInsertionSort, size);
     stop = high_resolution_clock::now();
     time_span = duration_cast<duration<double> >(stop - start);
     cout << "Insertion Sort: " << time_span.count() << " seconds; " << endl;
-    cout << "Verified: " << verify(arrInsertionSort, size) << endl;
+    verify(arrInsertionSort, size);
     
     //Quick sort test
     arrQuickSort = copyArray(arr1, size);
@@ -228,7 +234,7 @@ int main()
     stop = high_resolution_clock::now();
     time_span = duration_cast<duration<double> >(stop - start);
     cout << "Quick Sort    : " << time_span.count() << " seconds " << endl;
-    cout << "Verified: " << verify(arrInsertionSort, size) << endl;
+    verify(arrInsertionSort, size);
     
 
 
