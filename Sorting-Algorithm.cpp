@@ -105,10 +105,10 @@ void bucketSort(){
 }
 
 bool verify(int arr[], int size){
-    bool result = true;
-    for(int i = 0; i < size - 1;)
-        arr[i] <= arr[i + 1] ? i++ :  result = false;
-    return result;
+    for(int i = 0; i < size - 1; i++)
+        if (arr[i] > arr[i + 1])
+            return false;
+    return true;
 }
 
 using namespace std::chrono;
@@ -117,7 +117,7 @@ int main()
 {
     
     cout << "***** Test of Wide Range Uniform Distribution Dataset *****" << endl;
-    int size = 10000;
+    int size = 100;
     int* arr1 = getRandom(size);
     
     //Bublesort test starts here
@@ -127,7 +127,8 @@ int main()
     auto stop = high_resolution_clock::now();
     duration<double> time_span = duration_cast<duration<double>>(stop - start);
     cout << "Bubble Sort: " << time_span.count() << " seconds; " << endl;
-    
+    cout << "Verified: " << verify(arrBobbleSort, size) << endl;
+
     //Make sure start by coping a new array from arr1
 
     cout << "***** Test of Narrow Range Uniform Distribution Dataset *****" << endl;
