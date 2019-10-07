@@ -10,6 +10,7 @@
 #include <ctime>
 #include <chrono>
 #include <math.h>
+#include <iomanip>
 
 using namespace std;
 
@@ -148,6 +149,7 @@ void verify(int arr[], int size){
 }
 
 using namespace std::chrono;
+using std::setw;
 
 void testOfTwoPara(int arr[], int size, void (*sortAlgo)(int[], int), string name){
     int* arrToBeSorted = copyArray(arr, size);
@@ -155,7 +157,9 @@ void testOfTwoPara(int arr[], int size, void (*sortAlgo)(int[], int), string nam
     (*sortAlgo)(arrToBeSorted, size);
     auto stop = high_resolution_clock::now();
     duration<double> time_span = duration_cast<duration<double> >(stop - start);
-    cout << name << "  : " << time_span.count() << " seconds  " << endl;
+    cout << left;
+    cout << showpoint;
+    cout << setw(15) << name << ": " << time_span.count() << " seconds" << endl;
 }
 
 void testOfThreePara(int arr[], int size, void (*sortAlgo)(int[], int, int), string name){
@@ -164,7 +168,8 @@ void testOfThreePara(int arr[], int size, void (*sortAlgo)(int[], int, int), str
     (*sortAlgo)(arrToBeSorted, 0, size - 1);
     auto stop = high_resolution_clock::now();
     duration<double> time_span = duration_cast<duration<double> >(stop - start);
-    cout << name << "  : " << time_span.count() << " seconds  " << endl;
+    cout << left;
+    cout << setw(15) << name << ": " << time_span.count() << " seconds  " << endl;
 }
 
 
@@ -172,7 +177,7 @@ int main()
 {
     
     cout << "***** Test of Wide Range Uniform Distribution Dataset *****" << endl;
-    int size = 100000;
+    int size = 1000;
     cout << "Large number of data: " << size << endl;
     int* arr1 = getRandom(size);
     
