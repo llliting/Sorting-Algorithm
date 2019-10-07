@@ -45,6 +45,13 @@ int* copyArray(int arr[], int size){
     return sortedArr;
 }
 
+void verify(int arr[], int size){
+    for(int i = 0; i < size - 1; i++)
+        if (arr[i] > arr[i + 1])
+            cout << "***VERIGIED***" << endl;
+    cout << "***SORTING IS NOT CORRECT***" << endl;
+}
+
 
 void bubbleSort(int arr[], int size)
 {
@@ -129,8 +136,39 @@ void randomQuckSort(){
     
 }
 
-void countingSort(){
+//Do the range test here *for me
+void countingSort(int arr[], int size){
+    int max = arr[0];
+    int min = arr[0];
     
+    for(int i = 0; i < size; i++){
+        if(max < arr[i])
+            max = arr[i];
+        if(min > arr[i])
+            min = arr[i];
+    }
+    
+    int* count = new int[max - min + 1];
+    int* output = new int[size];
+    
+    for(int i = 0; i < size; i++)
+        count[arr[i]-min]++;
+    
+    for(int i = 1; i < size; i++)
+        count[i] += count[i-1];
+    
+    for(int i = size - 1; i > -1; i--)
+    {
+        output[count[arr[i]-min] -1 ] = arr[i];
+        count[arr[i]-min]--;
+    }
+    
+    for(int i = 0; i < size; i++)
+        arr[i] = output[i];
+    
+    delete[] count;
+    delete[] output;
+    //verify(arr, size);
 }
 
 void radixSort(){
@@ -141,15 +179,9 @@ void bucketSort(){
     
 }
 
-void verify(int arr[], int size){
-    for(int i = 0; i < size - 1; i++)
-        if (arr[i] > arr[i + 1])
-            cout << "***VERIGIED***" << endl;
-    cout << "***SORTING IS NOT CORRECT***" << endl;
-}
+
 
 using namespace std::chrono;
-using std::setw;
 
 void testOfTwoPara(int arr[], int size, void (*sortAlgo)(int[], int), string name){
     int* arrToBeSorted = copyArray(arr, size);
@@ -159,7 +191,7 @@ void testOfTwoPara(int arr[], int size, void (*sortAlgo)(int[], int), string nam
     duration<double> time_span = duration_cast<duration<double> >(stop - start);
     cout << left;
     cout << showpoint;
-    cout << setw(15) << name << ": " << time_span.count() << " seconds" << endl;
+    cout << std::setw(15) << name << ": " << time_span.count() << " seconds" << endl;
 }
 
 void testOfThreePara(int arr[], int size, void (*sortAlgo)(int[], int, int), string name){
@@ -169,15 +201,13 @@ void testOfThreePara(int arr[], int size, void (*sortAlgo)(int[], int, int), str
     auto stop = high_resolution_clock::now();
     duration<double> time_span = duration_cast<duration<double> >(stop - start);
     cout << left;
-    cout << setw(15) << name << ": " << time_span.count() << " seconds  " << endl;
+    cout << std::setw(15) << name << ": " << time_span.count() << " seconds  " << endl;
 }
 
 
-int main()
-{
-    
+int main(){
     cout << "***** Test of Wide Range Uniform Distribution Dataset *****" << endl;
-    int size = 1000;
+    int size = 10000;
     cout << "Large number of data: " << size << endl;
     int* arr1 = getRandom(size);
     
@@ -185,16 +215,18 @@ int main()
     testOfTwoPara(arr1, size, selectionSort, "SelectionSort");
     testOfTwoPara(arr1, size, insertionSort, "InsertionSort");
     testOfThreePara(arr1, size, quickSort, "QuickSort");
+    testOfTwoPara(arr1, size, countingSort, "CountingSort");
     
-    size = 10000;
+    
+    size = 1000;
     cout << "\nSmall number of data: " << size << endl;
     arr1 = getRandom(size);
     
     testOfTwoPara(arr1, size, bubbleSort, "BubbleSort");
     testOfTwoPara(arr1, size, selectionSort, "SelectionSort");
     testOfTwoPara(arr1, size, insertionSort, "InsertionSort");
-    
     testOfThreePara(arr1, size, quickSort, "QuickSort");
+    testOfTwoPara(arr1, size, countingSort, "CountingSort");
     
     
     cout << "***** Test of Narrow Range Uniform Distribution Dataset *****" << endl;
