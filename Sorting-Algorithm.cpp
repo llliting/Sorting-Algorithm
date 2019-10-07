@@ -90,8 +90,29 @@ void heapSort(){
 }
 
 //Stop here
-void quickSort(){
+int partition (int arr[], int p, int q)
+{
+    int pivot = arr[q];
+    int i = (p - 1);
     
+    for (int j = p; j < q; j++)
+        if (arr[j] < pivot){
+            i++;
+            swap(&arr[i], &arr[j]);
+        }
+    swap(&arr[i + 1], &arr[q]);
+    return (i + 1);
+}
+
+
+void quickSort(int arr[], int p, int q)
+{
+    if (p < q)
+    {
+        int par = partition(arr, p, q);
+        quickSort(arr, p, par - 1);
+        quickSort(arr, par + 1, q);
+    }
 }
 
 void randomQuckSort(){
@@ -123,7 +144,8 @@ int main()
 {
     
     cout << "***** Test of Wide Range Uniform Distribution Dataset *****" << endl;
-    int size = 1000;
+    int size = 100000;
+    cout << "Large number of data: " << size << endl;
     int* arr1 = getRandom(size);
     
     //Bubblesort test starts here
@@ -132,8 +154,7 @@ int main()
     bubbleSort(arrBubbleSort, size);
     auto stop = high_resolution_clock::now();
     duration<double> time_span = duration_cast<duration<double> >(stop - start);
-    cout << "Bubble Sort: " << time_span.count() << " seconds; " << endl;
-    cout << "Verified: " << verify(arrBubbleSort, size) << endl;
+    cout << "Bubble Sort   : " << time_span.count() << " seconds  " << endl;
     
     //Selection sort test
     int* arrSelectionSort = copyArray(arr1, size);
@@ -141,8 +162,44 @@ int main()
     selectionSort(arrSelectionSort, size);
     stop = high_resolution_clock::now();
     time_span = duration_cast<duration<double> >(stop - start);
-    cout << "Selection Sort: " << time_span.count() << " seconds; " << endl;
-    cout << "Verified: " << verify(arrSelectionSort, size) << endl;
+    cout << "Selection Sort: " << time_span.count() << " seconds  " << endl;
+    
+    //Quick sort test
+    int* arrQuickSort = copyArray(arr1, size);
+    start = high_resolution_clock::now();
+    quickSort(arrQuickSort, 0, size - 1);
+    stop = high_resolution_clock::now();
+    time_span = duration_cast<duration<double> >(stop - start);
+    cout << "Quick Sort    : " << time_span.count() << " seconds " << endl;
+    
+    size = 10000;
+    cout << "Small number of data: " << size << endl;
+    arr1 = getRandom(size);
+    
+    //Bubblesort test starts here
+    arrBubbleSort = copyArray(arr1, size);
+    start = high_resolution_clock::now();
+    bubbleSort(arrBubbleSort, size);
+    stop = high_resolution_clock::now();
+    time_span = duration_cast<duration<double> >(stop - start);
+    cout << "Bubble Sort   : " << time_span.count() << " seconds  " << endl;
+    
+    //Selection sort test
+    arrSelectionSort = copyArray(arr1, size);
+    start = high_resolution_clock::now();
+    selectionSort(arrSelectionSort, size);
+    stop = high_resolution_clock::now();
+    time_span = duration_cast<duration<double> >(stop - start);
+    cout << "Selection Sort: " << time_span.count() << " seconds  " << endl;
+    
+    //Quick sort test
+    arrQuickSort = copyArray(arr1, size);
+    start = high_resolution_clock::now();
+    quickSort(arrQuickSort, 0, size - 1);
+    stop = high_resolution_clock::now();
+    time_span = duration_cast<duration<double> >(stop - start);
+    cout << "Quick Sort    : " << time_span.count() << " seconds " << endl;
+    
     
     cout << "***** Test of Narrow Range Uniform Distribution Dataset *****" << endl;
     
