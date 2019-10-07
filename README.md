@@ -1,12 +1,10 @@
 # Sorting-Algo
 
-Collaborate with [Liting Huang](https://github.com/llliting) 
+Collaborate with [Liting Huang](https://github.com/llliting).  
 
-Implement comparison sorts and counting sorts. 
+Sorting-Algorithm implements comparison sorts and counting sorts. It also provides tests for the actually running time on different distributions of the data set.
 
-Test the actually running time on different distributions of the data set.
-
-To run the file, type in: 
+**To run the file, type in:**
 ```
 $ make
 $ ./sorting.exe
