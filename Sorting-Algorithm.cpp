@@ -69,7 +69,16 @@ void selectionSort(int arr[], int size){
 }
 
 void insertionSort(int arr[], int size){
-    for(int i = 0; i < size; i++)
+    int i,j, key;
+    for(i = 1; i < size; i ++){
+        key = arr[i];
+        j = i-1;
+        while(j>=0 & arr[j] > key){
+            arr[j+1] = arr[j];
+            j --;
+        }
+        arr[j+1] = key;
+    }
 }
 
 void recursiveInsertionSort(){
@@ -143,6 +152,14 @@ int main()
     time_span = duration_cast<duration<double> >(stop - start);
     cout << "Selection Sort: " << time_span.count() << " seconds; " << endl;
     cout << "Verified: " << verify(arrSelectionSort, size) << endl;
+
+    int* arrInsertionSort = copyArray(arr1, size);
+    start = high_resolution_clock::now();
+    insertionSort(arrInsertionSort, size);
+    stop = high_resolution_clock::now();
+    time_span = duration_cast<duration<double> >(stop - start);
+    cout << "Insertion Sort: " << time_span.count() << " seconds; " << endl;
+    cout << "Verified: " << verify(arrInsertionSort, size) << endl;
     
     cout << "***** Test of Narrow Range Uniform Distribution Dataset *****" << endl;
     
