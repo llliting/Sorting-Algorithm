@@ -22,11 +22,11 @@ void swap(int *x, int *y)
 
 int* getRandom(int size) {
     int* arr = new int[size];
-
+    
     srand( (unsigned)time(NULL));
     for (int i = 0; i < size; ++i)
         arr[i] = rand();
-
+    
     return arr;
 }
 
@@ -123,7 +123,7 @@ int main()
 {
     
     cout << "***** Test of Wide Range Uniform Distribution Dataset *****" << endl;
-    int size = 100;
+    int size = 1000;
     int* arr1 = getRandom(size);
     
     //Bubblesort test starts here
@@ -133,10 +133,17 @@ int main()
     auto stop = high_resolution_clock::now();
     duration<double> time_span = duration_cast<duration<double> >(stop - start);
     cout << "Bubble Sort: " << time_span.count() << " seconds; " << endl;
-    cout << "Verified: " << verify(arrBobbleSort, size) << endl;
-
-    //Make sure start by coping a new array from arr1
-
+    cout << "Verified: " << verify(arrBubbleSort, size) << endl;
+    
+    //Selection sort test
+    int* arrSelectionSort = copyArray(arr1, size);
+    start = high_resolution_clock::now();
+    selectionSort(arrSelectionSort, size);
+    stop = high_resolution_clock::now();
+    time_span = duration_cast<duration<double> >(stop - start);
+    cout << "Selection Sort: " << time_span.count() << " seconds; " << endl;
+    cout << "Verified: " << verify(arrSelectionSort, size) << endl;
+    
     cout << "***** Test of Narrow Range Uniform Distribution Dataset *****" << endl;
     
     cout << "***** Test of Wide Range Normal Distribution Dataset *****" << endl;
@@ -145,12 +152,5 @@ int main()
     
     cout << "***** Test of Narrow Range Two Picks Distribution Dataset *****" << endl;
     
-    //Selection sort test
-    int* arrSelectionSort = copyArray(arr1, size);
-    start = high_resolution_clock::now();
-    selectionSort(arrSelectionSort, size);
-    stop = high_resolution_clock::now();
-    time_span = duration_cast<duration<double> >(stop - start);
-    cout << "Selection Sort: " << time_span.count() << " seconds; " << endl;    
     return 0;
 }
