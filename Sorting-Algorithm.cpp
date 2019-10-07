@@ -58,8 +58,14 @@ void recursiveBubbleSort(){
     
 }
 
-void selectionSort(){
-    
+void selectionSort(int arr[], int size){
+    for(int i = 0; i < size; i ++){
+        int* small = &arr[i];
+        for(int j = i+1; j < size; j ++)
+            if(arr[j] < *small)
+                small = &arr[j];
+        swap(small, &arr[i]);
+    }
 }
 
 void insertionSort(){
@@ -113,15 +119,20 @@ int main()
     int size = 100000;
     int* arr1 = getRandom(size);
     
-    //Bublesort test starts here
-    int* arrBobbleSort = copyArray(arr1, size);
+    //Bubblesort test starts here
+    int* arrBubbleSort = copyArray(arr1, size);
     auto start = high_resolution_clock::now();
-    bubbleSort(arrBobbleSort, size);
+    bubbleSort(arrBubbleSort, size);
     auto stop = high_resolution_clock::now();
-    duration<double> time_span = duration_cast<duration<double>>(stop - start);
+    duration<double> time_span = duration_cast<duration<double> >(stop - start);
     cout << "Bubble Sort: " << time_span.count() << " seconds; " << endl;
     
-    //Maske sure start by coping a new array from arr1
-    
+    //Selection sort test
+    int* arrSelectionSort = copyArray(arr1, size);
+    start = high_resolution_clock::now();
+    selectionSort(arrSelectionSort, size);
+    stop = high_resolution_clock::now();
+    time_span = duration_cast<duration<double> >(stop - start);
+    cout << "Selection Sort: " << time_span.count() << " seconds; " << endl;    
     return 0;
 }
