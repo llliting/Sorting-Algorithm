@@ -191,7 +191,9 @@ void testOfTwoPara(int arr[], int size, void (*sortAlgo)(int[], int), string nam
     duration<double> time_span = duration_cast<duration<double> >(stop - start);
     cout << left;
     cout << showpoint;
-    cout << std::setw(15) << name << ": " << time_span.count() << " seconds" << endl;
+    cout << std::setw(15) << name << ": " << time_span.count();
+    cout << right;
+    cout << std::setw(15) << "seconds" << endl;
 }
 
 void testOfThreePara(int arr[], int size, void (*sortAlgo)(int[], int, int), string name){
