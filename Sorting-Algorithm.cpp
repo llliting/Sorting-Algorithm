@@ -1,9 +1,9 @@
 //
-//  main.cpp
+//  Sorting-Algorithm.cpp
 //  Sort-Algo-Project
 //
 //  Created by 肖正义 on 10/6/19.
-//  Copyright © 2019 Zhengyi Xiao. All rights reserved.
+//  Copyright © 2019 Zhengyi Xiao and Liting Huang. All rights reserved.
 //
 
 #include <iostream>
@@ -84,7 +84,7 @@ void heapSort(){
 }
 
 //Stop here
-void quckSort(){
+void quickSort(){
     
 }
 
@@ -104,13 +104,20 @@ void bucketSort(){
     
 }
 
+bool verify(int arr[], int size){
+    bool result = true;
+    for(int i = 0; i < size - 1;)
+        arr[i] <= arr[i + 1] ? i++ :  result = false;
+    return result;
+}
+
 using namespace std::chrono;
 
 int main()
 {
     
     cout << "***** Test of Wide Range Uniform Distribution Dataset *****" << endl;
-    int size = 100000;
+    int size = 10000;
     int* arr1 = getRandom(size);
     
     //Bublesort test starts here
@@ -121,7 +128,15 @@ int main()
     duration<double> time_span = duration_cast<duration<double>>(stop - start);
     cout << "Bubble Sort: " << time_span.count() << " seconds; " << endl;
     
-    //Maske sure start by coping a new array from arr1
+    //Make sure start by coping a new array from arr1
+
+    cout << "***** Test of Narrow Range Uniform Distribution Dataset *****" << endl;
+    
+    cout << "***** Test of Wide Range Normal Distribution Dataset *****" << endl;
+    
+    cout << "***** Test of Wide Range Chi-Squared Distribution Dataset *****" << endl;
+    
+    cout << "***** Test of Narrow Range Two Picks Distribution Dataset *****" << endl;
     
     return 0;
 }
