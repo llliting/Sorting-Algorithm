@@ -91,7 +91,7 @@ void insertionSort(int arr[], int size){
     }
 }
 
-void recursiveInsertionSort(){
+inline void recursiveInsertionSort(){
     
 }
 
