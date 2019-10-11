@@ -111,28 +111,16 @@ inline void merge(int arr[], int l, int m, int r){
     k = l; 
 
     while (i < n1 && j < n2){ 
-        if (L[i] <= R[j]) { 
-            arr[k] = L[i]; 
-            i++; 
-        } 
-        else{ 
-            arr[k] = R[j]; 
-            j++; 
-        } 
-        k++; 
+        if (L[i] <= R[j]) 
+            arr[k++] = L[i++]; 
+        else
+            arr[k++] = R[j++]; 
     }  
 
-    while (i < n1) { 
-        arr[k] = L[i]; 
-        i++; 
-        k++; 
-    } 
-
-    while (j < n2) { 
-        arr[k] = R[j]; 
-        j++; 
-        k++; 
-    } 
+    while (i < n1) 
+        arr[k++] = L[i++]; 
+    while (j < n2) 
+        arr[k++] = R[j++]; 
 } 
   
 
@@ -306,6 +294,7 @@ int main(){
     testOfTwoPara(arr1, size, countingSort, "CountingSort");
     testOfTwoPara(arr1, size, radixSort, "RadixSort");
     testOfTwoPara(arr1, size, bucketSort, "BucketSort");
+    testOfThreePara(arr1, size, mergeSort, "MergeSort");
     
     size = 10000;
     cout << "\nSmall number of data: " << size << endl;
@@ -318,6 +307,8 @@ int main(){
     testOfTwoPara(arr1, size, countingSort, "CountingSort");
     testOfTwoPara(arr1, size, radixSort, "RadixSort");
     testOfTwoPara(arr1, size, bucketSort, "BucketSort");
+    testOfThreePara(arr1, size, mergeSort, "MergeSort");
+
     
     cout << "***** Test of Narrow Range Uniform Distribution Dataset *****" << endl;
     
