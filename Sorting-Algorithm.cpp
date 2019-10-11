@@ -2,7 +2,7 @@
 //  Sorting-Algorithm.cpp
 //  Sort-Algo-Project
 //
-//  Created by 肖正义 on 10/6/19.
+//  Created by Zhengyi Xiao on 10/6/19.
 //  Copyright © 2019 Zhengyi Xiao and Liting Huang. All rights reserved.
 //
 
@@ -14,8 +14,7 @@
 
 using namespace std;
 
-void swap(int *x, int *y)
-{
+void swap(int *x, int *y){
     int tmp = *x;
     *x = *y;
     *y = tmp;
@@ -24,7 +23,7 @@ void swap(int *x, int *y)
 int* getRandom(int size) {
     int* arr = new int[size];
     
-    srand( (unsigned)time(NULL));
+    srand((unsigned)time(NULL));
     for (int i = 0; i < size; ++i)
         arr[i] = rand();
     
@@ -48,15 +47,14 @@ int* copyArray(int arr[], int size){
 void verify(int arr[], int size){
     for(int i = 0; i < size - 1; i++)
         if (arr[i] > arr[i + 1]){
-            cout << arr[i] << " " << arr[i + 1] << endl;
+            cout << "***WRONG***: " << arr[i] << " " << arr[i + 1] << endl;
             return;
         }
     cout << "***VERIFIED***" << endl;
 }
 
 
-void bubbleSort(int arr[], int size)
-{
+void bubbleSort(int arr[], int size){
     int i, j;
     for (i = 0; i < size - 1; i++)
         for (j = 0; j < size - i - 1; j++)
@@ -92,85 +90,152 @@ void insertionSort(int arr[], int size){
 }
 
 inline void recursiveInsertionSort(){
-
+    
 }
 
 inline void merge(int arr[], int l, int m, int r){
-    int i, j, k; 
-    int n1 = m - l + 1; 
-    int n2 =  r - m; 
-    int L[n1], R[n2]; 
-
-    for (i = 0; i < n1; i++) 
-        L[i] = arr[l + i]; 
-    for (j = 0; j < n2; j++) 
-        R[j] = arr[m + 1+ j]; 
-
-    i = 0; 
-    j = 0; 
-    k = l; 
-
-    while (i < n1 && j < n2){ 
-        if (L[i] <= R[j]) 
-            arr[k++] = L[i++]; 
+    int i, j, k;
+    int n1 = m - l + 1;
+    int n2 =  r - m;
+    int L[n1], R[n2];
+    
+    for (i = 0; i < n1; i++)
+        L[i] = arr[l + i];
+    for (j = 0; j < n2; j++)
+        R[j] = arr[m + 1+ j];
+    
+    i = 0;
+    j = 0;
+    k = l;
+    
+    while (i < n1 && j < n2){
+        if (L[i] <= R[j])
+            arr[k++] = L[i++];
         else
-            arr[k++] = R[j++]; 
-    }  
-
-    while (i < n1) 
-        arr[k++] = L[i++]; 
-    while (j < n2) 
-        arr[k++] = R[j++]; 
-} 
-  
-
-void mergeSort(int arr[], int l, int r){ 
-    if (l < r){ 
-        int m = l+(r-l)/2; 
-        mergeSort(arr, l, m); 
-        mergeSort(arr, m+1, r); 
-        merge(arr, l, m, r); 
-    } 
+            arr[k++] = R[j++];
+    }
+    
+    while (i < n1)
+        arr[k++] = L[i++];
+    while (j < n2)
+        arr[k++] = R[j++];
 }
 
 
-//Sikp this
-void mergeSortWithInsertion(){
+void mergeSort(int arr[], int l, int r){
+    if (l < r){
+        int m = l+(r-l)/2;
+        mergeSort(arr, l, m);
+        mergeSort(arr, m+1, r);
+        merge(arr, l, m, r);
+    }
+}
+
+void insertion_sort(int A[], int p, int r) {
+    int i, j, key;
     
+    for (j = p + 1; j <= r; j++) {
+        key = A[j];
+        i = j - 1;
+        while (i >= p && A[i] > key) {
+            A[i + 1] = A[i];
+            i = i - 1;
+        }
+        A[i + 1] = key;
+    }
+}
+
+void mergeSortInsertion(int A[], int p, int r) {
+    if (p >= r) return;
+    
+    if (r - p < 20){
+        insertion_sort(A, p, r);
+    }
+    else{
+        int q = (p + r) / 2;
+        mergeSortInsertion(A, p, q);
+        mergeSortInsertion(A, q + 1, r);
+        merge(A, p, q, r);
+    }
+}
+
+void selection_sort(int A[], int p, int r) {
+    int min, temp;
+    for (int i = p; i < r; i++) {
+        min = i;
+        for (int j = i + 1; j <= r; j++)
+            if (A[j] < A[min])
+                min = j;
+        temp = A[i];
+        A[i] = A[min];
+        A[min] = temp;
+    }
+}
+
+void mergeSortSelection(int A[], int p, int r) {
+    if (p >= r)
+        return;
+    if (r - p < 20) {
+        selection_sort(A, p, r);
+    }
+    else {
+        int q = (p + r) / 2;
+        mergeSortSelection(A, p, q);
+        mergeSortSelection(A, q + 1, r);
+        merge(A, p, q, r);
+    }
 }
 
 void heapSort(){
     
 }
 
-//Stop here
-int partition (int arr[], int p, int q){
+int partition(int arr[], int p, int q){
     int pivot = arr[q];
     int i = (p - 1);
     
     for (int j = p; j < q; j++)
-        if (arr[j] < pivot){
+        if (arr[j] < pivot)
             swap(&arr[++i], &arr[j]);
-        }
+    
     swap(&arr[i + 1], &arr[q]);
     return (i + 1);
 }
 
 
 void quickSort(int arr[], int p, int q){
-    if (p < q)
-    {
-        int par = partition(arr, p, q);
-        quickSort(arr, p, par - 1);
-        quickSort(arr, par + 1, q);
+    if (p < q){
+        int part = partition(arr, p, q);
+        quickSort(arr, p, part - 1);
+        quickSort(arr, part + 1, q);
     }
 }
 
-void randomQuckSort(){
+int randomizedPartition(int arr[], int p, int q){
+    srand((unsigned)time(NULL));
+    int i = 0;
+    int A[3] = {0};
+    for(;i < 3;i++)
+        A[i] = arr[p + rand() % (( q + 1 ) - p)];
+    int pivot = A[1];
     
+    i = (p - 1);
+    for (int j = p; j < q; j++)
+        if (arr[j] < pivot)
+            swap(&arr[++i], &arr[j]);
+    
+    swap(&arr[i + 1], &arr[q]);
+    return (i + 1);
 }
 
-//Do the range test here *for me
+void randomizedQuckSort(int arr[], int p, int q){
+    if (p < q){
+        int part = partition(arr, p, q);
+        quickSort(arr, p, part - 1);
+        quickSort(arr, part + 1, q);
+    }
+}
+
 inline void countingSort(int arr[], int size){
     int max = arr[0];
     
@@ -283,7 +348,7 @@ void testOfThreePara(int arr[], int size, void (*sortAlgo)(int[], int, int), str
 
 int main(){
     cout << "***** Test of Wide Range Uniform Distribution Dataset *****" << endl;
-    int size = 100000;
+    int size = 1000;
     cout << "Large number of data: " << size << endl;
     int* arr1 = getRandom(size);
     
@@ -291,46 +356,52 @@ int main(){
     testOfTwoPara(arr1, size, selectionSort, "SelectionSort");
     testOfTwoPara(arr1, size, insertionSort, "InsertionSort");
     testOfThreePara(arr1, size, quickSort, "QuickSort");
+    testOfThreePara(arr1, size, randomizedQuckSort, "RandomizedQuckSort");
     testOfTwoPara(arr1, size, countingSort, "CountingSort");
     testOfTwoPara(arr1, size, radixSort, "RadixSort");
     testOfTwoPara(arr1, size, bucketSort, "BucketSort");
     testOfThreePara(arr1, size, mergeSort, "MergeSort");
+    testOfThreePara(arr1, size, mergeSortSelection, "MergeSort + Selection");
+    testOfThreePara(arr1, size, mergeSortInsertion, "MergeSort + Insertion");
     
-    size = 10000;
-    cout << "\nSmall number of data: " << size << endl;
-    arr1 = getRandom(size);
     
-    testOfTwoPara(arr1, size, bubbleSort, "BubbleSort");
-    testOfTwoPara(arr1, size, selectionSort, "SelectionSort");
-    testOfTwoPara(arr1, size, insertionSort, "InsertionSort");
-    testOfThreePara(arr1, size, quickSort, "QuickSort");
-    testOfTwoPara(arr1, size, countingSort, "CountingSort");
-    testOfTwoPara(arr1, size, radixSort, "RadixSort");
-    testOfTwoPara(arr1, size, bucketSort, "BucketSort");
-    testOfThreePara(arr1, size, mergeSort, "MergeSort");
-
     
-    cout << "***** Test of Narrow Range Uniform Distribution Dataset *****" << endl;
     
-    cout << "***** Test of Wide Range Normal Distribution Dataset *****" << endl;
-    
-    cout << "***** Test of Wide Range Chi-Squared Distribution Dataset *****" << endl;
-    size = 1000;
-    int arr2[1000] = {0};
-    arr2[0] = 10000;
-    arr2[999] = 1;
-    for(int i = 1; i < 999; i ++)
-        arr2[i] = 1;
-    cout << "\nnumber of data: " << size << endl;
-    
-    testOfTwoPara(arr2, size, bubbleSort, "BubbleSort");
-    testOfTwoPara(arr2, size, selectionSort, "SelectionSort");
-    testOfTwoPara(arr2, size, insertionSort, "InsertionSort");
-    testOfThreePara(arr2, size, quickSort, "QuickSort");
-    testOfTwoPara(arr2, size, countingSort, "CountingSort");
-    testOfTwoPara(arr2, size, radixSort, "RadixSort");
-    testOfTwoPara(arr2, size, bucketSort, "BucketSort");
-    cout << "***** Test of Narrow Range Two Picks Distribution Dataset *****" << endl;
-    
+    /*
+     size = 10000;
+     cout << "\nSmall number of data: " << size << endl;
+     arr1 = getRandom(size);
+     
+     testOfTwoPara(arr1, size, bubbleSort, "BubbleSort");
+     testOfTwoPara(arr1, size, selectionSort, "SelectionSort");
+     testOfTwoPara(arr1, size, insertionSort, "InsertionSort");
+     testOfThreePara(arr1, size, quickSort, "QuickSort");
+     testOfTwoPara(arr1, size, countingSort, "CountingSort");
+     testOfTwoPara(arr1, size, radixSort, "RadixSort");
+     testOfTwoPara(arr1, size, bucketSort, "BucketSort");
+     testOfThreePara(arr1, size, mergeSort, "MergeSort");
+     
+     cout << "***** Test of Narrow Range Uniform Distribution Dataset *****" << endl;
+     
+     cout << "***** Test of Wide Range Normal Distribution Dataset *****" << endl;
+     
+     cout << "***** Test of Wide Range Chi-Squared Distribution Dataset *****" << endl;
+     size = 1000;
+     int arr2[1000] = {0};
+     arr2[0] = 10000;
+     arr2[999] = 1;
+     for(int i = 1; i < 999; i ++)
+     arr2[i] = 1;
+     cout << "\nnumber of data: " << size << endl;
+     
+     testOfTwoPara(arr2, size, bubbleSort, "BubbleSort");
+     testOfTwoPara(arr2, size, selectionSort, "SelectionSort");
+     testOfTwoPara(arr2, size, insertionSort, "InsertionSort");
+     testOfThreePara(arr2, size, quickSort, "QuickSort");
+     testOfTwoPara(arr2, size, countingSort, "CountingSort");
+     testOfTwoPara(arr2, size, radixSort, "RadixSort");
+     testOfTwoPara(arr2, size, bucketSort, "BucketSort");
+     cout << "***** Test of Narrow Range Two Picks Distribution Dataset *****" << endl;
+     */
     return 0;
 }
