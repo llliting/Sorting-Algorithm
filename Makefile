@@ -1,5 +1,5 @@
 CC = g++
-FLAGS = -Wall -O0
+FLAGS = -O0
 
 all: sortingAlgo
 
