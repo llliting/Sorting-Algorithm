@@ -1,6 +1,6 @@
 # Sorting-Algorithm
 
-Collaborate with [Zheengyi Xiao](https://github.com/Tucaoking).  
+Collaborate with [Zhengyi Xiao](https://github.com/Tucaoking).  
 
 Sorting-Algorithm implements most of common used comparison sorts and linear sorts with some slight adujusment. It also provides a sample test case to show the actual running time of the sorting algorithm.
 
