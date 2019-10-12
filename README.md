@@ -36,8 +36,8 @@ $ ./sorting.exe
 * make the size of data changeable.
 
 * interactive.py:
-* Promote user to selete sorting algorithms
-* Make few tables and graphs:
+* Prompt the user to selete sorting algorithms
+* Make some tables and graphs:
 1) Matplotlib, numpy, and other python packages (on A-N)
 2) Gnuplot (on Terminal)
 * Generate a running report in Excel
