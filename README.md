@@ -7,7 +7,7 @@ Sorting-Algorithm implements most of common used comparison sorts and linear sor
 **To run the sample test, type in:**
 ```
 $ go to tools folder
-$ make all
+$ python3 dataGeneator.py
 $ go back 
 $ make all
 $ ./sorting.exe
