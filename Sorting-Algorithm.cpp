@@ -406,31 +406,3 @@ void testOfTwoPara(int arr[], int size, void (*sortAlgo)(int[], int), string nam
     cout << right;
     cout << std::setw(10) << "seconds" << endl;
 }
-
-/*
-int main(){
-    cout << "***** Test of Wide Range Uniform Distribution Dataset *****" << endl;
-    int size = 1000;
-    cout << "Number of data: " << size << endl;
-    double* arr1 = getRandom_d(size);
-    
-    testOfTwoPara(arr1, size, bubbleSort, "BubbleSort");
-    testOfTwoPara(arr1, size, recursiveBubbleSort, "RecursiveBubbleSort");
-    testOfTwoPara(arr1, size, selectionSort, "SelectionSort");
-    testOfTwoPara(arr1, size, insertionSort, "InsertionSort");
-    testOfTwoPara(arr1, size, recursiveInsertionSort, "RecursiveInsertionSort");
-    testOfThreePara(arr1, size, mergeSort, "MergeSort");
-    testOfThreePara(arr1, size, mergeSortSelection, "MergeSort + Selection");
-    testOfThreePara(arr1, size, mergeSortInsertion, "MergeSort + Insertion");
-    testOfTwoPara(arr1, size, heapSort, "HeapSort");
-    testOfThreePara(arr1, size, quickSort, "QuickSort");
-    testOfThreePara(arr1, size, randomizedQuckSort, "RandomizedQuckSort");
-    
-    int* arr2 = getRandom_i(size);
-    testOfTwoPara(arr2, size, countingSort, "CountingSort");
-    testOfTwoPara(arr2, size, radixSort, "RadixSort");
-    testOfTwoPara(arr2, size, bucketSort, "BucketSort");
-    
-    return 0;
-}
-*/
