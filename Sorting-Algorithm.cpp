@@ -377,8 +377,6 @@ void testOfThreePara(int arr[], int size, void (*sortAlgo)(int[], int, int), str
     cout << std::setw(10) << "seconds" << endl;
 }
 
-
-#ifdef SAMPLE_MAIN
 int main(){
     cout << "***** Test of Wide Range Uniform Distribution Dataset *****" << endl;
     int size = 100000;
@@ -402,4 +400,4 @@ int main(){
     
     return 0;
 }
-#endif
+
