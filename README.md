@@ -1,4 +1,4 @@
-# Sorting-Algo
+# Sorting-Algorithm
 
 Collaborate with [Liting Huang](https://github.com/llliting).  
 
@@ -6,7 +6,10 @@ Sorting-Algorithm implements most of common used comparison sorts and linear sor
 
 **To run the sample test, type in:**
 ```
-$ make
+$ go to tools folder
+$ make all
+$ go back 
+$ make all
 $ ./sorting.exe
 ```
 **Sorting Algorithms:**
@@ -28,22 +31,13 @@ $ ./sorting.exe
 
 \*The implementations are based closely on the Introduction To Algorithms implementation described by Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein.
 
-To do
+**Future Work:**
+* datasetGeneator.py:
+* make the size of data changeable.
 
-sorting-algorithm.cpp
-  1) use inline asm to rewrite one sorting algo
-  2) void compress()
-  
-in tools folder: 
-  datasetGeneator.py:
-    generate different datasets.
-    
-  interactive.py:
-    Promote one 1) to selete sorting algorithms or 2) some default tests to run
-      Especially some special tests with some that have small modifications
-      Try compress to improve quicksort
-    Call the functions in cpp files
-    Make few tables and graphs:
-      1) Matplotlib, numpy, and other python packages (on A-N)
-      2) Gnuplot (on Terminal)
-    Generate a running report in Excel
+* interactive.py:
+* Promote user to selete sorting algorithms
+* Make few tables and graphs:
+1) Matplotlib, numpy, and other python packages (on A-N)
+2) Gnuplot (on Terminal)
+* Generate a running report in Excel
