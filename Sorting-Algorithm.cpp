@@ -14,13 +14,23 @@
 
 using namespace std;
 
-inline void swap(int *x, int *y){
-    int tmp = *x;
+inline void swap(double *x, double *y){
+    double tmp = *x;
     *x = *y;
     *y = tmp;
 }
 
-inline int* getRandom(int size) {
+inline double* getRandom_d(int size) {
+    double* arr = new double[size];
+    
+    srand((unsigned)time(NULL));
+    for (int i = 0; i < size; ++i)
+        arr[i] = rand();
+    
+    return arr;
+}
+
+inline int* getRandom_i(int size) {
     int* arr = new int[size];
     
     srand((unsigned)time(NULL));
@@ -30,20 +40,27 @@ inline int* getRandom(int size) {
     return arr;
 }
 
-inline void printArray(int arr[], int size){
+inline void printArray(double arr[], int size){
     for (int i = 0; i < size; i++)
         cout << arr[i] << " ";
     cout << endl;
 }
 
-inline int* copyArray(int arr[], int size){
+inline double* copyArray(double arr[], int size){
+    double* sortedArr = new double[size];
+    for(int i = 0; i < size; i++)
+        sortedArr[i] = arr[i];
+    return sortedArr;
+}
+
+inline int* copyArray_i(int arr[], int size){
     int* sortedArr = new int[size];
     for(int i = 0; i < size; i++)
         sortedArr[i] = arr[i];
     return sortedArr;
 }
 
-inline void verify(int arr[], int size){
+inline void verify(double arr[], int size){
     for(int i = 0; i < size - 1; i++)
         if (arr[i] > arr[i + 1]){
             cout << "***WRONG***: " << arr[i] << " " << arr[i + 1] << endl;
@@ -52,7 +69,7 @@ inline void verify(int arr[], int size){
     cout << "***VERIFIED***" << endl;
 }
 
-inline void bubbleSort(int arr[], int size){
+inline void bubbleSort(double arr[], int size){
     int i, j;
     for (i = 0; i < size - 1; i++)
         for (j = 0; j < size - i - 1; j++)
@@ -60,7 +77,7 @@ inline void bubbleSort(int arr[], int size){
                 swap(&arr[j], &arr[j + 1]);
 }
 
-inline void recursiveBubbleSort(int arr[], int size){
+inline void recursiveBubbleSort(double arr[], int size){
     if (size == 1)
         return;
     for (int i = 0; i < size - 1; i++)
@@ -69,9 +86,9 @@ inline void recursiveBubbleSort(int arr[], int size){
     recursiveBubbleSort(arr, size - 1);
 }
 
-inline void selectionSort(int arr[], int size){
+inline void selectionSort(double arr[], int size){
     for(int i = 0; i < size; i ++){
-        int* small = &arr[i];
+        double* small = &arr[i];
         for(int j = i+1; j < size; j ++)
             if(arr[j] < *small)
                 small = &arr[j];
@@ -79,7 +96,7 @@ inline void selectionSort(int arr[], int size){
     }
 }
 
-inline void insertionSort(int arr[], int size){
+inline void insertionSort(double arr[], int size){
     int i,j, key;
     for(i = 1; i < size; i ++){
         key = arr[i];
@@ -92,7 +109,7 @@ inline void insertionSort(int arr[], int size){
     }
 }
 
-inline void recursiveInsertionSort(int arr[], int size){
+inline void recursiveInsertionSort(double arr[], int size){
     if (size == 1)
         return;
     
@@ -106,7 +123,7 @@ inline void recursiveInsertionSort(int arr[], int size){
     arr[j + 1] = arr[size-1];
 }
 
-inline void merge(int arr[], int l, int m, int r){
+inline void merge(double arr[], int l, int m, int r){
     int i, j, k;
     int n1 = m - l + 1;
     int n2 =  r - m;
@@ -134,7 +151,7 @@ inline void merge(int arr[], int l, int m, int r){
         arr[k++] = R[j++];
 }
 
-inline void mergeSort(int arr[], int l, int r){
+inline void mergeSort(double arr[], int l, int r){
     if (l < r){
         int m = l+(r-l)/2;
         mergeSort(arr, l, m);
@@ -143,7 +160,7 @@ inline void mergeSort(int arr[], int l, int r){
     }
 }
 
-inline void insertion_sort(int A[], int p, int r) {
+inline void insertion_sort(double A[], int p, int r) {
     int i, j, key;
     
     for (j = p + 1; j <= r; j++) {
@@ -157,7 +174,7 @@ inline void insertion_sort(int A[], int p, int r) {
     }
 }
 
-inline void mergeSortInsertion(int A[], int p, int r) {
+inline void mergeSortInsertion(double A[], int p, int r) {
     if (p >= r) return;
     
     if (r - p < 20){
@@ -171,7 +188,7 @@ inline void mergeSortInsertion(int A[], int p, int r) {
     }
 }
 
-inline void selection_sort(int A[], int p, int r) {
+inline void selection_sort(double A[], int p, int r) {
     int min, temp;
     for (int i = p; i < r; i++) {
         min = i;
@@ -184,7 +201,7 @@ inline void selection_sort(int A[], int p, int r) {
     }
 }
 
-inline void mergeSortSelection(int A[], int p, int r) {
+inline void mergeSortSelection(double A[], int p, int r) {
     if (p >= r)
         return;
     if (r - p < 20) {
@@ -198,7 +215,7 @@ inline void mergeSortSelection(int A[], int p, int r) {
     }
 }
 
-inline void maxHeap(int arr[], int size, int i){
+inline void maxHeap(double arr[], int size, int i){
     int largest = i;
     int l = (i << 1) + 1;
     int r = (i << 1) + 2;
@@ -215,7 +232,7 @@ inline void maxHeap(int arr[], int size, int i){
     }
 }
 
-inline void heapSort(int arr[], int size){
+inline void heapSort(double arr[], int size){
     for (int i = size / 2 - 1; i >= 0; i--)
         maxHeap(arr, size, i);
     
@@ -225,7 +242,7 @@ inline void heapSort(int arr[], int size){
     }
 }
 
-inline int partition(int arr[], int p, int q){
+inline int partition(double arr[], int p, int q){
     int pivot = arr[q];
     int i = (p - 1);
     
@@ -237,7 +254,7 @@ inline int partition(int arr[], int p, int q){
     return (i + 1);
 }
 
-inline void quickSort(int arr[], int p, int q){
+inline void quickSort(double arr[], int p, int q){
     if (p < q){
         int part = partition(arr, p, q);
         quickSort(arr, p, part - 1);
@@ -245,7 +262,7 @@ inline void quickSort(int arr[], int p, int q){
     }
 }
 
-inline int randomizedPartition(int arr[], int p, int q){
+inline int randomizedPartition(double arr[], int p, int q){
     srand((unsigned)time(NULL));
     int i = 0;
     int A[3] = {0};
@@ -262,7 +279,7 @@ inline int randomizedPartition(int arr[], int p, int q){
     return (i + 1);
 }
 
-inline void randomizedQuckSort(int arr[], int p, int q){
+inline void randomizedQuckSort(double arr[], int p, int q){
     if (p < q){
         int part = partition(arr, p, q);
         quickSort(arr, p, part - 1);
@@ -351,8 +368,8 @@ inline void bucketSort(int arr[], int size) {
 
 using namespace std::chrono;
 
-void testOfTwoPara(int arr[], int size, void (*sortAlgo)(int[], int), string name){
-    int* arrToBeSorted = copyArray(arr, size);
+void testOfTwoPara(double arr[], int size, void (*sortAlgo)(double[], int), string name){
+    double* arrToBeSorted = copyArray(arr, size);
     auto start = high_resolution_clock::now();
     (*sortAlgo)(arrToBeSorted, size);
     auto stop = high_resolution_clock::now();
@@ -364,8 +381,8 @@ void testOfTwoPara(int arr[], int size, void (*sortAlgo)(int[], int), string nam
     cout << std::setw(10) << "seconds" << endl;
 }
 
-void testOfThreePara(int arr[], int size, void (*sortAlgo)(int[], int, int), string name){
-    int* arrToBeSorted = copyArray(arr, size);
+void testOfThreePara(double arr[], int size, void (*sortAlgo)(double[], int, int), string name){
+    double* arrToBeSorted = copyArray(arr, size);
     auto start = high_resolution_clock::now();
     (*sortAlgo)(arrToBeSorted, 0, size - 1);
     auto stop = high_resolution_clock::now();
@@ -377,11 +394,25 @@ void testOfThreePara(int arr[], int size, void (*sortAlgo)(int[], int, int), str
     cout << std::setw(10) << "seconds" << endl;
 }
 
+void testOfTwoPara(int arr[], int size, void (*sortAlgo)(int[], int), string name){
+    int* arrToBeSorted = copyArray_i(arr, size);
+    auto start = high_resolution_clock::now();
+    (*sortAlgo)(arrToBeSorted, size);
+    auto stop = high_resolution_clock::now();
+    duration<double> time_span = duration_cast<duration<double> >(stop - start);
+    cout << left;
+    cout << showpoint;
+    cout << std::setw(30) << name << ": " << std::setw(12) << time_span.count();
+    cout << right;
+    cout << std::setw(10) << "seconds" << endl;
+}
+
+/*
 int main(){
     cout << "***** Test of Wide Range Uniform Distribution Dataset *****" << endl;
-    int size = 100000;
+    int size = 1000;
     cout << "Number of data: " << size << endl;
-    int* arr1 = getRandom(size);
+    double* arr1 = getRandom_d(size);
     
     testOfTwoPara(arr1, size, bubbleSort, "BubbleSort");
     testOfTwoPara(arr1, size, recursiveBubbleSort, "RecursiveBubbleSort");
@@ -394,10 +425,12 @@ int main(){
     testOfTwoPara(arr1, size, heapSort, "HeapSort");
     testOfThreePara(arr1, size, quickSort, "QuickSort");
     testOfThreePara(arr1, size, randomizedQuckSort, "RandomizedQuckSort");
-    testOfTwoPara(arr1, size, countingSort, "CountingSort");
-    testOfTwoPara(arr1, size, radixSort, "RadixSort");
-    testOfTwoPara(arr1, size, bucketSort, "BucketSort");
+    
+    int* arr2 = getRandom_i(size);
+    testOfTwoPara(arr2, size, countingSort, "CountingSort");
+    testOfTwoPara(arr2, size, radixSort, "RadixSort");
+    testOfTwoPara(arr2, size, bucketSort, "BucketSort");
     
     return 0;
 }
-
+*/
