@@ -9,8 +9,11 @@ The result suggest that the running time of quicksort is largely depended on the
 In general, the running time of merge sort and insertion sort do better than that of the quick sort. Quicksort appears a large variation. Merge sort with insertion sort in it has the best average running time. RadixSort is very suitable for sorting a small range of floating numbers. 
 
 **Requirements**
+
 C++11
+
 Any version above Python3
+
 Python Packages
 1) pandas
 2) scipy
@@ -18,7 +21,7 @@ Python Packages
 **To run the sample test:**
 ```
 $ cd tools/
-$ python3 dataGeneator.py
+$ python3 dataGeneator.py arg1(the size of dataset you want to generate)
 $ cd -
 $ make all
 $ ./sorting.exe
@@ -64,4 +67,5 @@ from the subarray.
 **Acknowledgement**
 
 This work was supported in part by [Liting Huang](https://github.com/llliting).
+
 Modified Sorting Algorithms are based on Cormen, T. (2009). Introduction to algorithms (3rd ed.) [3rd ed.]. Cambridge, Mass.: MIT Press. (2009). Retrieved October 12, 2019, from Franklin and Marshall College Online Library.
